@@ -1,6 +1,7 @@
 const express = require('express'),
          cors = require('cors'),
        morgan = require('morgan'),
+  compression = require('compression'),
           app = express();
 
 //Using a function as a middleware
@@ -8,6 +9,7 @@ const express = require('express'),
 // app.use(cors());
 
 app.use(morgan("common"));
+app.use(compression());
 app.use(cors({
   origin: ["http://localhost/3000"],
   methods: ["GET", "POST"],
