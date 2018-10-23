@@ -1,17 +1,22 @@
 const express = require('express'),
+         cors = require('cors'),
           app = express();
 
-// Using a general Middleware with 'use' method
-app.use((req, res, next)=>{
-  if(0 > 1){
-    res.json("This is incorrect");
-  }else {
-    next(); //Proceeds to the next route
-  }
-});
+//Using a function as a middleware
+// Using only the cors() method without specifying anything gives any application full right to calling the api from any point
+// app.use(cors());
+
+app.use(cors({
+  origin: ["http://localhost/3000"],
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}))
+
 
 app.get("/", (req, res)=>{
-  res.json("Welcome to the development world")
+  res.json({
+    status: "API is live!"
+  })
 })
 
 app.listen(3000, ()=>{
